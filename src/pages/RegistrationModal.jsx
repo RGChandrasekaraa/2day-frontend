@@ -4,10 +4,13 @@ import { startAuthentication, startRegistration } from "@simplewebauthn/browser"
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
+
 const RegistrationModal = ({ isOpen, onClose }) => {
   const [modalContent, setModalContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const SERVER_URL = "http://localhost:3000";
+  const SERVER_URL = apiUrl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

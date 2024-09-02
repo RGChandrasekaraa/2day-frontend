@@ -5,9 +5,11 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
 const LoginModal = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const SERVER_URL = "http://localhost:3000";
+  const SERVER_URL = apiUrl;
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLogin = async (e) => {
