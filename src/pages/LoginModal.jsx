@@ -9,7 +9,6 @@ const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 const LoginModal = ({ isOpen, onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const SERVER_URL = apiUrl;
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLogin = async (e) => {
@@ -20,7 +19,7 @@ const LoginModal = ({ isOpen, onClose }) => {
 
     try {
       // 1. Get challenge from server
-      const initResponse = await fetch(`${SERVER_URL}/init-auth?email=${email}`, {
+      const initResponse = await fetch(`${apiUrl}/init-auth?email=${email}`, {
         credentials: "include",
       });
       const options = await initResponse.json();
@@ -32,7 +31,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       const authJSON = await startAuthentication(options);
 
       // 3. Verify passkey with DB
-      const verifyResponse = await fetch(`${SERVER_URL}/verify-auth`, {
+      const verifyResponse = await fetch(`${apiUrl}/verify-auth`, {
         credentials: "include",
         method: "POST",
         headers: {

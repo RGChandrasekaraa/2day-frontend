@@ -10,7 +10,6 @@ const apiUrl = import.meta.env.VITE_BACKEND_URL;
 const RegistrationModal = ({ isOpen, onClose }) => {
   const [modalContent, setModalContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const SERVER_URL = apiUrl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
     try {
       // 1. Get challenge from server
       const initResponse = await fetch(
-        `${SERVER_URL}/init-register?email=${email}&firstName=${firstName}&lastName=${lastName}&dob=${dob}`,
+        `${apiUrl}/init-register?email=${email}&firstName=${firstName}&lastName=${lastName}&dob=${dob}`,
         { credentials: "include" }
       );
       const options = await initResponse.json();
@@ -36,7 +35,7 @@ const RegistrationModal = ({ isOpen, onClose }) => {
       const registrationJSON = await startRegistration(options);
 
       // 3. Save passkey in DB
-      const verifyResponse = await fetch(`${SERVER_URL}/verify-register`, {
+      const verifyResponse = await fetch(`${apiUrl}/verify-register`, {
         credentials: "include",
         method: "POST",
         headers: {
